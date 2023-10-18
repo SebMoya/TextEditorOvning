@@ -25,11 +25,22 @@
             <Button Command="ApplicationCommands.Open" Content="Open" />
             <Button Command="ApplicationCommands.Save" Content="Save" />
             <Separator Margin="10,0,10,0" />
-            <StackPanel Orientation="Horizontal">
-                
-            </StackPanel>
+            <ToggleButton Name="boldBtn" Content="b" Click="BoldBtn_OnClick"/>
             <Separator Margin="10,0,10,0" />
+            <ToggleButton Name="italicBtn" Content="i" Click="ItalicBtn_OnClick"/>
             <Separator Margin="10,0,10,0" />
+            <ToggleButton Name="UnderscoreBtn" Content="u" Click="UnderscoreBtn_OnClick"/>
+            <ComboBox Width="40" Name="fontSize">
+                <ComboBoxItem Name="small" Selected="small_OnSelected">12</ComboBoxItem>
+                <ComboBoxItem Name="medium" Selected="medium_OnSelected">24</ComboBoxItem>
+                <ComboBoxItem Name="large" Selected="large_OnSelected">36</ComboBoxItem>
+            </ComboBox>
+            <Separator Margin="10,0,10,0" />
+            <ComboBox Width="40" Name="Fonts">
+                <ComboBoxItem Name="ConsolasFont" Selected="ConsolasFont_OnSelected">Consolas</ComboBoxItem>
+                <ComboBoxItem Name="ArialFont" Selected="ArialFont_OnSelected">Arial</ComboBoxItem>
+                <ComboBoxItem Name="TimesNewRomanFont" Selected="TimesNewRomanFont_OnSelected">Times New Roman</ComboBoxItem>
+            </ComboBox>
         </ToolBar>
         <RichTextBox
             x:Name="TextField"

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using System.Net.Mime;
 using Microsoft.Win32;
 
 namespace TextEditor
@@ -23,11 +24,13 @@ namespace TextEditor
     public partial class TextEditorView : UserControl
     {
         TextProps _textProps = new TextProps();
+       public List<FontFamily> fonts = new List<FontFamily>();
 
         public TextEditorView()
         {
             InitializeComponent();
             DataContext = _textProps;
+            fonts = _textProps.FontFamilies;
         }
 
 
@@ -53,6 +56,74 @@ namespace TextEditor
                 TextRange range = new TextRange(TextField.Document.ContentStart, TextField.Document.ContentEnd);
                 range.Save(fileStream, DataFormats.Rtf);
             }
+        }
+
+
+        private void small_OnSelected(object sender, RoutedEventArgs e)
+        {
+            TextField.FontSize = 12;
+        }
+
+        private void medium_OnSelected(object sender, RoutedEventArgs e)
+        {
+            TextField.FontSize = 24;
+        }
+
+        private void large_OnSelected(object sender, RoutedEventArgs e)
+        {
+            TextField.FontSize = 36;
+        }
+
+        private void BoldBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (boldBtn.IsChecked == true)
+            {
+                TextField.FontWeight = FontWeights.ExtraBold;
+            }
+            else
+            {
+                TextField.FontWeight = FontWeights.Normal;
+            }
+        }
+
+        private void ItalicBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (italicBtn.IsChecked == true)
+            {
+                TextField.FontStyle = FontStyles.Italic;
+            }
+            else
+            {
+            }
+        }
+
+        private void UnderscoreBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            TextRange text = new TextRange(TextField.Document.ContentStart, TextField.Document.ContentEnd);
+            if (UnderscoreBtn.IsChecked == true)
+            {
+                text.ApplyPropertyValue(Inline.TextDecorationsProperty, TextDecorations.Underline);
+            }
+            else
+            {
+                text.ApplyPropertyValue(Inline.TextDecorationsProperty, null);
+            }
+        }
+
+        private void ConsolasFont_OnSelected(object sender, RoutedEventArgs e)
+        {
+            TextField.FontFamily = new FontFamily("Consolas");
+        }
+
+        private void ArialFont_OnSelected(object sender, RoutedEventArgs e)
+        {
+            TextField.FontFamily = new FontFamily("Arial");
+        }
+
+        private void TimesNewRomanFont_OnSelected(object sender, RoutedEventArgs e)
+        {
+            TextField.FontFamily = new FontFamily("Times New Roman");
+
         }
     }
 }
